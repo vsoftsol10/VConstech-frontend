@@ -48,17 +48,15 @@ const Login = () => {
   };
 
   return (
-    <div style={{ 
+    <div style={{
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
       flexDirection: 'column',
-      fontFamily: "'Montserrat', sans-serif",
       height: '100vh',
       margin: '-20px 0 50px'
     }}>
       <style>{`
-       
         * {
           box-sizing: border-box;
         }
@@ -173,19 +171,19 @@ const Login = () => {
         }
 
         .login-btn {
-          border-radius: 20px;
-          border: 1px solid #FF4B2B;
-          background-color: #FF4B2B;
-          color: #FFFFFF;
-          font-size: 12px;
-          font-weight: bold;
-          padding: 12px 45px;
-          letter-spacing: 1px;
-          text-transform: uppercase;
-          transition: transform 80ms ease-in;
-          cursor: pointer;
-          margin-top: 10px;
-        }
+           border-radius: 20px;
+           border: 1px solid #FFBD28;
+           background-color: #FFBD28;
+           color: #000;
+           font-size: 12px;
+           font-weight: bold;
+           padding: 12px 45px;
+           letter-spacing: 1px;
+           text-transform: uppercase;
+           transition: all 0.3s ease-in-out;
+           cursor: pointer;
+           margin-top: 10px;
+          }
 
         .login-btn:active {
           transform: scale(0.95);
@@ -202,6 +200,7 @@ const Login = () => {
 
         .login-btn:hover {
           opacity: 0.9;
+           background-color: #e6a800;
         }
 
         .overlay-container {
@@ -321,7 +320,7 @@ const Login = () => {
         }
       `}</style>
 
-      <h2 style={{ 
+      <h2 style={{
         textAlign: 'center',
         fontWeight: 'bold',
         marginBottom: '20px',
@@ -334,18 +333,18 @@ const Login = () => {
         <div className="form-container sign-in-container">
           <form className="login-form" onSubmit={handleSignInSubmit}>
             <h1>Sign in</h1>
-            <input 
-              type="email" 
+            <input
+              type="email"
               name="email"
-              placeholder="Email" 
+              placeholder="Email"
               value={signInData.email}
               onChange={handleSignInChange}
               required
             />
-            <input 
-              type="password" 
+            <input
+              type="password"
               name="password"
-              placeholder="Password" 
+              placeholder="Password"
               value={signInData.password}
               onChange={handleSignInChange}
               required
@@ -358,18 +357,18 @@ const Login = () => {
         <div className="form-container sign-in-container">
           <form className="login-form" onSubmit={handleSignInSubmit}>
             <h1>Sign in</h1>
-            <input 
-              type="email" 
+            <input
+              type="email"
               name="email"
-              placeholder="Email" 
+              placeholder="Email"
               value={signInData.email}
               onChange={handleSignInChange}
               required
             />
-            <input 
-              type="password" 
+            <input
+              type="password"
               name="password"
-              placeholder="Password" 
+              placeholder="Password"
               value={signInData.password}
               onChange={handleSignInChange}
               required
@@ -402,7 +401,7 @@ const Login = () => {
 
       <footer className="footer">
         <p>
-         Created by <a target="_blank" href="https://vsoftsolutions.com">VSoft Solutions</a> | Powered by <a target="_blank" href="https://vsoftsolutions.com/vconstech">VConstech</a></p>
+          Created by <a target="_blank" href="https://vsoftsolutions.com">VSoft Solutions</a> | Powered by <a target="_blank" href="https://vsoftsolutions.com/vconstech">VConstech</a></p>
       </footer>
     </div>
   );
