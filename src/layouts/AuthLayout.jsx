@@ -1,407 +1,170 @@
 import React, { useState } from 'react';
-import LoginBg from '../assets/loginbackground2.jpeg';
-
+import { Eye, EyeOff, Mail, Lock, User, Building, HardHat, CreditCard } from 'lucide-react';
+import MainLogo from '../assets/constech-logo.png';
 const Login = () => {
-  const [isRightPanelActive, setIsRightPanelActive] = useState(false);
-  const [signInData, setSignInData] = useState({
+  const [showPassword, setShowPassword] = useState(false);
+  const [userType, setUserType] = useState('contractor');
+  const [formData, setFormData] = useState({
     email: '',
-    password: ''
-  });
-  const [signUpData, setSignUpData] = useState({
-    name: '',
-    email: '',
+    empId: '',
     password: ''
   });
 
-  const handleSignUpClick = () => {
-    setIsRightPanelActive(true);
-  };
-
-  const handleSignInClick = () => {
-    setIsRightPanelActive(false);
-  };
-
-  const handleSignInChange = (e) => {
-    setSignInData({
-      ...signInData,
+  const handleInputChange = (e) => {
+    setFormData({
+      ...formData,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleSignUpChange = (e) => {
-    setSignUpData({
-      ...signUpData,
-      [e.target.name]: e.target.value
-    });
-  };
-
-  const handleSignInSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Sign In Data:', signInData);
-    // Add your sign in logic here
-  };
-
-  const handleSignUpSubmit = (e) => {
-    e.preventDefault();
-    console.log('Sign Up Data:', signUpData);
-    // Add your sign up logic here
+    console.log('Login Data:', formData, 'User Type:', userType);
   };
 
   return (
-    <div style={{
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-      flexDirection: 'column',
-      height: '100vh',
-      margin: '-20px 0 50px'
-    }}>
-      <style>{`
-        * {
-          box-sizing: border-box;
-        }
-
-        .login-container {
-          background-image: url(${LoginBg});
-          background-size: cover;
-          border-radius: 10px;
-          box-shadow: 0 14px 28px rgba(0,0,0,0.25), 
-                      0 10px 10px rgba(0,0,0,0.22);
-          position: relative;
-          overflow: hidden;
-          width: 768px;
-          max-width: 100%;
-          min-height: 480px;
-        }
-
-        .form-container {
-          position: absolute;
-          top: 0;
-          height: 100%;
-          transition: all 0.6s ease-in-out;
-        }
-
-        .sign-in-container {
-          left: 0;
-          width: 50%;
-          z-index: 2;
-        }
-
-        .login-container.right-panel-active .sign-in-container {
-          transform: translateX(100%);
-        }
-
-        .sign-up-container {
-          left: 0;
-          width: 50%;
-          opacity: 0;
-          z-index: 1;
-        }
-
-        .login-container.right-panel-active .sign-up-container {
-          transform: translateX(100%);
-          opacity: 1;
-          z-index: 5;
-          animation: show 0.6s;
-        }
-
-        @keyframes show {
-          0%, 49.99% {
-            opacity: 0;
-            z-index: 1;
-          }
-          
-          50%, 100% {
-            opacity: 1;
-            z-index: 5;
-          }
-        }
-
-        .login-form {
-          background-color: #FFFFFF;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-direction: column;
-          padding: 0 50px;
-          height: 100%;
-          text-align: center;
-        }
-
-        .login-form h1 {
-          font-weight: bold;
-          margin: 0;
-        }
-
-        .login-form h2 {
-          text-align: center;
-        }
-
-        .login-form p {
-          font-size: 14px;
-          font-weight: 100;
-          line-height: 20px;
-          letter-spacing: 0.5px;
-          margin: 20px 0 30px;
-        }
-
-        .login-form span {
-          font-size: 12px;
-        }
-
-        .login-form a {
-          color: #333;
-          font-size: 14px;
-          text-decoration: none;
-          margin: 15px 0;
-        }
-
-        .login-form input {
-          background-color: #eee;
-          border: none;
-          padding: 12px 15px;
-          margin: 8px 0;
-          width: 100%;
-          border-radius: 4px;
-        }
-
-        .login-form input:focus {
-          outline: none;
-          background-color: #e0e0e0;
-        }
-
-        .login-btn {
-           border-radius: 20px;
-           border: 1px solid #FFBD28;
-           background-color: #FFBD28;
-           color: #000;
-           font-size: 12px;
-           font-weight: bold;
-           padding: 12px 45px;
-           letter-spacing: 1px;
-           text-transform: uppercase;
-           transition: all 0.3s ease-in-out;
-           cursor: pointer;
-           margin-top: 10px;
-          }
-
-        .login-btn:active {
-          transform: scale(0.95);
-        }
-
-        .login-btn:focus {
-          outline: none;
-        }
-
-        .login-btn.ghost {
-          background-color: transparent;
-          border-color: #FFFFFF;
-        }
-
-        .login-btn:hover {
-          opacity: 0.9;
-           background-color: #e6a800;
-        }
-
-        .overlay-container {
-          position: absolute;
-          top: 0;
-          left: 50%;
-          width: 50%;
-          height: 100%;
-          overflow: hidden;
-          transition: transform 0.6s ease-in-out;
-          z-index: 100;
-        }
-
-        .login-container.right-panel-active .overlay-container{
-          transform: translateX(-100%);
-        }
-
-        .overlay {
-          background: #FF416C;
-          background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-          background: linear-gradient(to right, #FF4B2B, #FF416C);
-          background-repeat: no-repeat;
-          background-size: cover;
-          background-position: 0 0;
-          color: #FFFFFF;
-          position: relative;
-          left: -100%;
-          height: 100%;
-          width: 200%;
-          transform: translateX(0);
-          transition: transform 0.6s ease-in-out;
-        }
-
-        .login-container.right-panel-active .overlay {
-          transform: translateX(50%);
-        }
-
-        .overlay-panel {
-          position: absolute;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-direction: column;
-          padding: 0 40px;
-          text-align: center;
-          top: 0;
-          height: 100%;
-          width: 50%;
-          transform: translateX(0);
-          transition: transform 0.6s ease-in-out;
-        }
-
-        .overlay-left {
-          transform: translateX(-20%);
-        }
-
-        .login-container.right-panel-active .overlay-left {
-          transform: translateX(0);
-        }
-
-        .overlay-right {
-          right: 0;
-          transform: translateX(0);
-        }
-
-        .login-container.right-panel-active .overlay-right {
-          transform: translateX(20%);
-        }
-
-        .social-container {
-          margin: 20px 0;
-        }
-
-        .social-container a {
-          border: 1px solid #DDDDDD;
-          border-radius: 50%;
-          display: inline-flex;
-          justify-content: center;
-          align-items: center;
-          margin: 0 5px;
-          height: 40px;
-          width: 40px;
-          color: #333;
-          text-decoration: none;
-          transition: all 0.3s ease;
-        }
-
-        .social-container a:hover {
-          background-color: #f0f0f0;
-          transform: scale(1.1);
-        }
-
-        .footer {
-          background-color: #222;
-          color: #fff;
-          font-size: 14px;
-          bottom: 0;
-          position: fixed;
-          left: 0;
-          right: 0;
-          text-align: center;
-          z-index: 999;
-          padding: 10px 0;
-        }
-
-        .footer p {
-          margin: 10px 0;
-        }
-
-        .footer i {
-          color: red;
-        }
-
-        .footer a {
-          color: #3c97bf;
-          text-decoration: none;
-        }
-      `}</style>
-
-      <h2 style={{
-        textAlign: 'center',
-        fontWeight: 'bold',
-        marginBottom: '20px',
-        color: '#333'
-      }}>
-        VConstech
-      </h2>
-
-      <div className={`login-container ${isRightPanelActive ? 'right-panel-active' : ''}`}>
-        <div className="form-container sign-in-container">
-          <form className="login-form" onSubmit={handleSignInSubmit}>
-            <h1>Sign in</h1>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={signInData.email}
-              onChange={handleSignInChange}
-              required
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={signInData.password}
-              onChange={handleSignInChange}
-              required
-            />
-            <a href="#">Forgot your password?</a>
-            <button type="submit" className="login-btn">Sign In</button>
-          </form>
+    <div className="min-h-screen bg-gray-50 flex flex-col">
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col justify-center py-12 sm:px-6 lg:px-8 pb-24">
+        <div className="sm:mx-auto sm:w-full sm:max-w-md">
+          <img src={MainLogo} alt='Logo' className="mx-auto h-32 w-auto" />
+          <p className="text-center text-sm text-gray-600">
+            Sign in to your construction management portal
+          </p>
         </div>
 
-        <div className="form-container sign-in-container">
-          <form className="login-form" onSubmit={handleSignInSubmit}>
-            <h1>Sign in</h1>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={signInData.email}
-              onChange={handleSignInChange}
-              required
-            />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={signInData.password}
-              onChange={handleSignInChange}
-              required
-            />
-            <a href="#">Forgot your password?</a>
-            <button type="submit" className="login-btn">Sign In</button>
-          </form>
-        </div>
-
-        <div className="overlay-container">
-          <div className="overlay">
-            <div className="overlay-panel overlay-left">
-              <h1>Welcome Back!</h1>
-              <h2>Contractor Nesamani</h2>
-              <p>Shall we start our work.</p>
-              <button className="login-btn ghost" onClick={handleSignInClick}>
-                Sign In
+        <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+          <div className="bg-white py-8 px-4 shadow-xl rounded-2xl sm:px-10">
+            {/* User Type Cards */}
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <button
+                onClick={() => setUserType('contractor')}
+                className={`p-4 rounded-xl border-2 transition-all ${userType === 'contractor'
+                    ? 'border-yellow-500 bg-yellow-50'
+                    : 'border-gray-200 hover:border-gray-300'
+                  }`}
+              >
+                <HardHat className={`w-8 h-8 mx-auto mb-2 ${userType === 'contractor' ? 'text-yellow-500' : 'text-gray-400'
+                  }`} />
+                <p className="text-sm font-medium">Contractor</p>
+              </button>
+              <button
+                onClick={() => setUserType('engineer')}
+                className={`p-4 rounded-xl border-2 transition-all ${userType === 'engineer'
+                    ? 'border-yellow-500 bg-yellow-50'
+                    : 'border-gray-200 hover:border-gray-300'
+                  }`}
+              >
+                <User className={`w-8 h-8 mx-auto mb-2 ${userType === 'engineer' ? 'text-yellow-500' : 'text-gray-400'
+                  }`} />
+                <p className="text-sm font-medium">Site Engineer</p>
               </button>
             </div>
-            <div className="overlay-panel overlay-right">
-              <h1>Hello, Site Engineer!</h1>
-              <p>It's time to work.</p>
-              <button className="login-btn ghost" onClick={handleSignUpClick}>
-                Sign in
+
+            <div className="space-y-6">
+              {/* Dynamic Input Field based on User Type */}
+              <div className="relative">
+                {userType === 'contractor' ? (
+                  <>
+                    <Mail className="absolute left-2 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      placeholder="Email address"
+                      required
+                      className="w-full pl-10 pr-4 py-3 border-0 border-b-2 border-gray-200 focus:border-yellow-500 focus:outline-none bg-transparent text-gray-900 placeholder-gray-500"
+                    />
+                  </>
+                ) : (
+                  <>
+                    <CreditCard className="absolute left-2 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                    <input
+                      type="text"
+                      name="empId"
+                      value={formData.empId}
+                      onChange={handleInputChange}
+                      placeholder="Employee ID"
+                      required
+                      className="w-full pl-10 pr-4 py-3 border-0 border-b-2 border-gray-200 focus:border-yellow-500 focus:outline-none bg-transparent text-gray-900 placeholder-gray-500"
+                    />
+                  </>
+                )}
+              </div>
+
+              <div className="relative">
+                <Lock className="absolute left-2 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" />
+                <input
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  value={formData.password}
+                  onChange={handleInputChange}
+                  placeholder="Password"
+                  required
+                  className="w-full pl-10 pr-12 py-3 border-0 border-b-2 border-gray-200 focus:border-yellow-500 focus:outline-none bg-transparent text-gray-900 placeholder-gray-500"
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
+              </div>
+
+              <button
+                onClick={handleSubmit}
+                className="w-full bg-gray-900 text-white py-3 px-4 rounded-xl hover:bg-gray-800 transition-colors font-medium transform hover:scale-105 active:scale-95"
+              >
+                Sign In as {userType === 'contractor' ? 'Contractor' : 'Site Engineer'}
               </button>
+            </div>
+
+            {/* User Type Specific Message */}
+            <div className="mt-4 p-3 bg-gray-50 rounded-lg">
+              <p className="text-xs text-gray-600 text-center">
+                {userType === 'contractor'
+                  ? 'Civil Contractor - Use your registered email address'
+                  : 'Site Engineer - Use your employee ID provided by the company'
+                }
+              </p>
             </div>
           </div>
         </div>
       </div>
 
-      <footer className="footer">
-        <p>
-          Created by <a target="_blank" href="https://vsoftsolutions.com">VSoft Solutions</a> | Powered by <a target="_blank" href="https://vsoftsolutions.com/vconstech">VConstech</a></p>
+      {/* Fixed Footer - Now properly positioned */}
+      <footer className="w-full bg-white shadow-inner mt-auto">
+        <div className="max-w-7xl mx-auto px-4 py-4 text-center text-sm flex flex-col sm:flex-row items-center justify-center gap-2">
+          <p className="text-gray-700">
+            Created by{" "}
+            <strong>
+              <a
+                href="https://thevsoft.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-yellow-600 hover:text-yellow-700 hover:underline transition-colors"
+              >
+                VSoft Solutions
+              </a>
+            </strong>
+          </p>
+          <span className="hidden sm:inline text-gray-400">|</span>
+          <p className="text-gray-700">
+            Powered by{" "}
+            <strong>
+              <a
+                href="https://vconstech.thevsoft.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-yellow-600 hover:text-yellow-700 hover:underline transition-colors"
+              >
+                VConstech
+              </a>
+            </strong>
+          </p>
+        </div>
       </footer>
     </div>
   );
