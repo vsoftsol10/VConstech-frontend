@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { Eye, EyeOff, Mail, Lock, User, Building, HardHat, CreditCard } from 'lucide-react';
+import { useNavigate } from 'react-router-dom'; // Add this import for routing
 import MainLogo from '../assets/constech-logo.png';
+
 const Login = () => {
+  const navigate = useNavigate(); // Initialize navigate hook
   const [showPassword, setShowPassword] = useState(false);
   const [userType, setUserType] = useState('contractor');
   const [formData, setFormData] = useState({
@@ -9,17 +12,55 @@ const Login = () => {
     empId: '',
     password: ''
   });
+  const [error, setError] = useState('');
+
+  // Dummy credentials
+  const dummyCredentials = {
+    contractor: {
+      email: 'contractor@demo.com',
+      password: 'demo123'
+    },
+    engineer: {
+      empId: 'ENG001',
+      password: 'demo123'
+    }
+  };
 
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
+    // Clear error when user starts typing
+    if (error) setError('');
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Login Data:', formData, 'User Type:', userType);
+    setError('');
+
+    if (userType === 'contractor') {
+      // Validate contractor credentials
+      if (formData.email === dummyCredentials.contractor.email && 
+          formData.password === dummyCredentials.contractor.password) {
+        console.log('Contractor login successful');
+        // Route to contractor dashboard
+        navigate('/contractorDashboard');
+      } else {
+        setError('Invalid email or password for contractor');
+      }
+    } else {
+      // Validate engineer credentials
+      if (formData.empId === dummyCredentials.engineer.empId && 
+          formData.password === dummyCredentials.engineer.password) {
+        console.log('Engineer login successful');
+        // You can add engineer dashboard route here if needed
+        // navigate('/engineerDashboard');
+        alert('Engineer dashboard not implemented yet');
+      } else {
+        setError('Invalid employee ID or password for engineer');
+      }
+    }
   };
 
   return (
@@ -38,7 +79,11 @@ const Login = () => {
             {/* User Type Cards */}
             <div className="grid grid-cols-2 gap-4 mb-6">
               <button
-                onClick={() => setUserType('contractor')}
+                onClick={() => {
+                  setUserType('contractor');
+                  setFormData({ email: '', empId: '', password: '' });
+                  setError('');
+                }}
                 className={`p-4 rounded-xl border-2 transition-all ${userType === 'contractor'
                     ? 'border-yellow-500 bg-yellow-50'
                     : 'border-gray-200 hover:border-gray-300'
@@ -49,7 +94,11 @@ const Login = () => {
                 <p className="text-sm font-medium">Contractor</p>
               </button>
               <button
-                onClick={() => setUserType('engineer')}
+                onClick={() => {
+                  setUserType('engineer');
+                  setFormData({ email: '', empId: '', password: '' });
+                  setError('');
+                }}
                 className={`p-4 rounded-xl border-2 transition-all ${userType === 'engineer'
                     ? 'border-yellow-500 bg-yellow-50'
                     : 'border-gray-200 hover:border-gray-300'
@@ -61,7 +110,7 @@ const Login = () => {
               </button>
             </div>
 
-            <div className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-6">
               {/* Dynamic Input Field based on User Type */}
               <div className="relative">
                 {userType === 'contractor' ? (
@@ -113,12 +162,35 @@ const Login = () => {
                 </button>
               </div>
 
+              {/* Error Message */}
+              {error && (
+                <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm">
+                  {error}
+                </div>
+              )}
+
               <button
-                onClick={handleSubmit}
+                type="submit"
                 className="w-full bg-gray-900 text-white py-3 px-4 rounded-xl hover:bg-gray-800 transition-colors font-medium transform hover:scale-105 active:scale-95"
               >
                 Sign In as {userType === 'contractor' ? 'Contractor' : 'Site Engineer'}
               </button>
+            </form>
+
+            {/* Demo Credentials */}
+            <div className="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-200">
+              <p className="text-xs font-semibold text-blue-800 mb-2">Demo Credentials:</p>
+              {userType === 'contractor' ? (
+                <div className="text-xs text-blue-700">
+                  <p><strong>Email:</strong> contractor@demo.com</p>
+                  <p><strong>Password:</strong> demo123</p>
+                </div>
+              ) : (
+                <div className="text-xs text-blue-700">
+                  <p><strong>Employee ID:</strong> ENG001</p>
+                  <p><strong>Password:</strong> demo123</p>
+                </div>
+              )}
             </div>
 
             {/* User Type Specific Message */}

@@ -110,7 +110,7 @@ const SidePannel = () => {
     const sidebarLinks = [
         { name: "Dashboard", path: "/", icon: dashboardicon },
         { name: "Add Site Engineer", path: "/add-site-engg", icon: siteEngg },
-        { name: "Create New Project", path: "/new-project", icon: createNewProject },
+        { name: "Create New Project", path: "/create-new-project", icon: createNewProject },
         { name: "Notification", path: "/notifications", icon: notification },
         { name: "Settings", path: "/settings", icon: settings },
         { name: "Logout", path: "/settings", icon: logout },
