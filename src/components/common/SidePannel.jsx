@@ -5,7 +5,9 @@ const SidePannel = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeIndex, setActiveIndex] = useState(0);
+  const [showLogoutPopup, setShowLogoutPopup] = useState(false);
 
+  // Icons
   const dashboardicon = (
     <svg className="w-6 h-6" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
       <path stroke="currentColor" strokeLinejoin="round" strokeWidth="2" d="M4 5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5Zm16 14a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1v-2a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2ZM4 13a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6Zm16-2a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v6Z" />
@@ -13,8 +15,8 @@ const SidePannel = () => {
   );
 
   const siteEngg = (
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-      strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+      fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="w-5 h-5">
       <path d="M16 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2" />
       <circle cx="9" cy="7" r="4" />
       <path d="M19 8v6" />
@@ -39,33 +41,24 @@ const SidePannel = () => {
   );
 
   const settings = (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+      viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
       <circle cx="12" cy="12" r="3" />
-      <path
-        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65
-    1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65
-    1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1
-    1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0
-    0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 1.65 0 0 0 1.51-1 1.65
-    1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65
-    1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1
-    4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2
-    2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9c0
-    .66.26 1.3.73 1.77.47.47 1.11.73 1.77.73h.09a2 2 0 1 1 0
-    4h-.09a1.65 1.65 0 0 0-1.51 1Z"
-      />
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 
+      2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 
+      1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09a1.65 
+      1.65 0 0 0-1-1.51 1.65 1.65 0 0 0-1.82.33l-.06.06a2 
+      2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 
+      1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09a1.65 
+      1.65 0 0 0 1.51-1 1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 
+      2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 
+      1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 
+      0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 
+      2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 
+      1.82V9c0 .66.26 1.3.73 1.77.47.47 1.11.73 1.77.73h.09a2 
+      2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1Z"/>
     </svg>
-
   );
 
   const logout = (
@@ -87,7 +80,7 @@ const SidePannel = () => {
     { name: "Logout", path: "/", icon: logout },
   ];
 
-  // 🔹 Sync active link with URL path
+  // Sync active link with URL path
   useEffect(() => {
     const currentIndex = sidebarLinks.findIndex(item => location.pathname === item.path);
     if (currentIndex !== -1) {
@@ -96,29 +89,69 @@ const SidePannel = () => {
   }, [location.pathname]);
 
   const handleItemClick = (index, path) => {
-    setActiveIndex(index);
-    navigate(path);
+    if (path === "/") {
+      // Show confirmation popup for logout
+      setShowLogoutPopup(true);
+    } else {
+      setActiveIndex(index);
+      navigate(path);
+    }
+  };
+
+  const confirmLogout = () => {
+    setShowLogoutPopup(false);
+    navigate("/"); // navigate after confirming
+  };
+
+  const cancelLogout = () => {
+    setShowLogoutPopup(false);
   };
 
   return (
-    <div className="fixed top-25 md:w-64 w-16 border-r border-gray-300 bg-white min-h-screen">
-      <div className="pt-4 flex flex-col">
-        {sidebarLinks.map((item, index) => (
-          <button
-            key={index}
-            onClick={() => handleItemClick(index, item.path)}
-            className={`flex items-center py-3 px-4 gap-3 transition-colors duration-200 w-full text-left cursor-pointer
-              ${activeIndex === index
-                ? "border-r-4 md:border-r-[6px] bg-[#ffbe00]/10 border-[#ffbe00] text-[#ffbe00]"
-                : "hover:bg-gray-100/90 border-white text-gray-700"
-              }`}
-          >
-            {item.icon}
-            <p className="md:block hidden">{item.name}</p>
-          </button>
-        ))}
+    <>
+      {/* Sidebar */}
+      <div className="fixed top-25 md:w-64 w-16 border-r border-gray-300 bg-white min-h-screen">
+        <div className="pt-4 flex flex-col">
+          {sidebarLinks.map((item, index) => (
+            <button
+              key={index}
+              onClick={() => handleItemClick(index, item.path)}
+              className={`flex items-center py-3 px-4 gap-3 transition-colors duration-200 w-full text-left cursor-pointer
+                ${activeIndex === index
+                  ? "border-r-4 md:border-r-[6px] bg-[#ffbe00]/10 border-[#ffbe00] text-[#ffbe00]"
+                  : "hover:bg-gray-100/90 border-white text-gray-700"
+                }`}
+            >
+              {item.icon}
+              <p className="md:block hidden">{item.name}</p>
+            </button>
+          ))}
+        </div>
       </div>
-    </div>
+
+      {/* Logout Confirmation Modal */}
+      {showLogoutPopup && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-80 text-center">
+            <h2 className="text-lg font-semibold text-gray-800 mb-3">Are you sure you want to logout?</h2>
+            <div className="flex justify-center gap-4 mt-4">
+              <button
+                onClick={confirmLogout}
+                className="bg-[#ffbe00] hover:bg-amber-400 text-gray-900 font-medium px-4 py-2 rounded-md"
+              >
+                Yes, Logout
+              </button>
+              <button
+                onClick={cancelLogout}
+                className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium px-4 py-2 rounded-md"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 
