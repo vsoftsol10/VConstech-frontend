@@ -6,7 +6,8 @@ import CreateNewProject from './pages/contractor/CreateNewProject';
 import { Route, Routes } from 'react-router-dom';
 import AddSiteEngg from './pages/contractor/AddSiteEngg';
 import Notification from './pages/contractor/Notification';
-import Settings from './pages/contractor/Settings';
+import OurEngineers from './pages/contractor/OurEngineers';
+import OurProjects from './pages/contractor/OurProjects';
 function App() {
 
   return (
@@ -16,7 +17,8 @@ function App() {
       <Route path='/add-site-engg' element={<AddSiteEngg/>} />
       <Route path='/create-new-project' element={<CreateNewProject/>} />
       <Route path='/notifications' element={<Notification/>} />
-      <Route path='/settings' element={<Settings/>} />
+      <Route path='/our-engg' element={<OurEngineers/>} />
+      <Route path='/our-projects' element={<OurProjects/>} />
     </Routes>
   )
 }
