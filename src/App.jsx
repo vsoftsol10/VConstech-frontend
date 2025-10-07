@@ -5,6 +5,7 @@ import ContractorDashboard from './pages/contractor/ContractorDashboard';
 import CreateNewProject from './pages/contractor/CreateNewProject';
 import { Route, Routes } from 'react-router-dom';
 import AddSiteEngg from './pages/contractor/AddSiteEngg';
+import Notification from './pages/contractor/Notification';
 function App() {
 
   return (
@@ -13,6 +14,7 @@ function App() {
       <Route path='/contractorDashboard' element={<ContractorDashboard/>} />
       <Route path='/add-site-engg' element={<AddSiteEngg/>} />
       <Route path='/create-new-project' element={<CreateNewProject/>} />
+      <Route path='/notifications' element={<Notification/>} />
     </Routes>
   )
 }
