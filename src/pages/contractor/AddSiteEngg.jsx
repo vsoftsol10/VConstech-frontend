@@ -133,7 +133,7 @@ const AddSiteEngg = () => {
     <div className="min-h-screen  ">
           <Navbar/>
           <SidePannel/>
-      <div className="max-w-5xl flex justify-center mx-auto my-30">
+      <div className="max-w-4xl flex justify-center mx-auto my-30">
         <div className="bg-white">
           <div className="mb-8 text-center">
             <h1 className="text-3xl  font-bold text-black mb-2">Add Site Engineer</h1>
