@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { User, Phone, Mail, Building, Hash, Lock, CreditCard, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '../../components/common/Navbar';
+import SidePannel from '../../components/common/SidePannel';
 
 const AddSiteEngg = () => {
     const navigate=useNavigate();
@@ -128,11 +130,13 @@ const AddSiteEngg = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black/50 p-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="bg-white rounded-lg shadow-2xl p-8 border-4 border-[#ffbe00]">
-          <div className="mb-8">
-            <h1 className="text-3xl font-bold text-black mb-2">Add Site Engineer</h1>
+    <div className="min-h-screen  ">
+          <Navbar/>
+          <SidePannel/>
+      <div className="max-w-4xl flex justify-center mx-auto my-30">
+        <div className="bg-white">
+          <div className="mb-8 text-center">
+            <h1 className="text-3xl  font-bold text-black mb-2">Add Site Engineer</h1>
             <p className="text-gray-700">Fill in the details to add a new site engineer to the system</p>
           </div>
 
