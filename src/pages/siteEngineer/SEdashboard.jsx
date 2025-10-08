@@ -5,7 +5,7 @@ const SEdashboard = () => {
   return (
     <div>
         <SiteNavbar/>
-       <h1 className='my-25 text-center'> SEdashboard </h1> 
+       <h1 className='my-35 text-center'> SEdashboard </h1> 
     </div>
   )
 }
