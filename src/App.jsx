@@ -9,6 +9,8 @@ import Notification from './pages/contractor/Notification';
 import OurEngineers from './pages/contractor/OurEngineers';
 import OurProjects from './pages/contractor/OurProjects';
 import SEdashboard from './pages/siteEngineer/SEdashboard';
+import SiteVault from './pages/siteEngineer/SiteVault';
+
 function App() {
 
   return (
@@ -21,6 +23,7 @@ function App() {
       <Route path='/our-engg' element={<OurEngineers/>} />
       <Route path='/our-projects' element={<OurProjects/>} />
       <Route path='/site-engineer-dashboard' element={<SEdashboard/>} />
+      <Route path='/vault' element={<SiteVault/>} />
     </Routes>
   )
 }
