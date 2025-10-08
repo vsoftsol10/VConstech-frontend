@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Wrench, HardHat, FileText } from 'lucide-react';
-import logo from "../../assets/constech-logo.png"
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Menu, X, Wrench, HardHat, FileText, FolderOpen } from 'lucide-react';
+import logo from "../../assets/constech-logo.png";
+
 export default function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -13,8 +17,29 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const menuItems = [
+    { name: 'Task Board', icon: Wrench, path: '/task-board' },
+    { name: 'Attendance', icon: HardHat, path: '/attendance' },
+    { name: 'Files', icon: FileText, path: '/vault' }
+  ];
+
+  const handleNavigation = (path) => {
+    navigate(path);
+    setIsMenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    // Add your logout logic here
+    console.log('Logging out...');
+    navigate('/login');
+  };
+
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
+
   return (
-    <nav className={`fixed w-full top-0 z-50 shadow-sm transition-all duration-300 ${
+    <nav className={`fixed w-full z-[9999] bg-white top-0  shadow-sm transition-all duration-300 ${
       scrolled ? 'bg-black shadow-2xl shadow-yellow-500/20' : 'bg-gradient-to-r from-yellow/10 to-yellow/10'
     }`}>
       {/* Construction Warning Stripe */}
@@ -25,44 +50,52 @@ export default function Navbar() {
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between py-4">
           {/* Logo with Construction Badge */}
-          <a
-                      href="#"
-                      className="hover:opacity-80 transition-opacity flex-shrink-0"
-                      aria-label="Constech Home"
-                    >
-                      <img
-                        className="h-16 w-32 sm:h-14 sm:w-28 md:h-16 md:w-32 lg:h-20 lg:w-40"
-                        src={logo}
-                        alt="Constech logo"
-                      />
-                    </a>
+          <button
+            onClick={() => handleNavigation('/')}
+            className="hover:opacity-80 transition-opacity flex-shrink-0"
+            aria-label="Constech Home"
+          >
+            <img
+              className="h-16 w-32 sm:h-14 sm:w-28 md:h-16 md:w-32 lg:h-20 lg:w-40"
+              src={logo}
+              alt="Constech logo"
+            />
+          </button>
 
           {/* Desktop Navigation Links */}
           <div className="hidden lg:flex items-center space-x-2">
-            {[
-              { name: 'Task Board', icon: Wrench, path: '/task-board' },
-              { name: 'Attendance', icon: HardHat, path: '/attendance' },
-              { name: 'Files', icon: FileText, path: '/vault' }
-            ].map((item, idx) => (
-              <a
+            {menuItems.map((item, idx) => (
+              <button
                 key={idx}
-                href={item.path}
-                className="group relative px-6 py-3 overflow-hidden"
+                onClick={() => handleNavigation(item.path)}
+                className={`group relative px-6 py-3 overflow-hidden ${
+                  isActive(item.path) ? 'bg-yellow-400/20' : ''
+                }`}
               >
                 {/* Background Effect */}
                 <div className="absolute inset-0 bg-yellow-400 transform -skew-x-12 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                 
                 {/* Content */}
                 <div className="relative flex items-center space-x-2">
-                  <item.icon className="w-4 h-4 text-yellow-400 group-hover:text-black transition-colors" />
-                  <span className="text-yellow-100 group-hover:text-black font-semibold transition-colors whitespace-nowrap">
+                  <item.icon className={`w-4 h-4 transition-colors ${
+                    isActive(item.path) 
+                      ? 'text-yellow-400' 
+                      : 'text-yellow-400 group-hover:text-black'
+                  }`} />
+                  <span className={`font-semibold transition-colors whitespace-nowrap ${
+                    isActive(item.path)
+                      ? 'text-yellow-400'
+                      : 'text-yellow-100 group-hover:text-black'
+                  }`}>
                     {item.name}
                   </span>
                 </div>
                 
                 {/* Bottom Border */}
-                <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-yellow-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300"></div>
-              </a>
+                <div className={`absolute bottom-0 left-0 right-0 h-0.5 bg-yellow-400 transform transition-transform duration-300 ${
+                  isActive(item.path) ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                }`}></div>
+              </button>
             ))}
           </div>
 
@@ -86,7 +119,10 @@ export default function Navbar() {
             </div>
 
             {/* Logout Button */}
-            <button className="group relative px-6 py-2.5 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-lg overflow-hidden shadow-lg shadow-yellow-500/30 hover:shadow-yellow-500/50 transition-all duration-300">
+            <button 
+              onClick={handleLogout}
+              className="group relative px-6 py-2.5 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-lg overflow-hidden shadow-lg shadow-yellow-500/30 hover:shadow-yellow-500/50 transition-all duration-300"
+            >
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-400 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
               <span className="relative flex items-center space-x-2">
                 <span>LOGOUT</span>
@@ -113,23 +149,35 @@ export default function Navbar() {
           <div className="px-4 py-6 space-y-6">
             {/* Mobile Navigation Links */}
             <div className="space-y-3">
-              {[
-                { name: 'Task Board', icon: Wrench },
-                { name: 'Attendance Registration', icon: HardHat },
-                { name: 'File Management', icon: FileText }
-              ].map((item, idx) => (
-                <a
+              {menuItems.map((item, idx) => (
+                <button
                   key={idx}
-                  href="#"
-                  className="group flex items-center space-x-3 p-4 bg-gradient-to-r from-yellow-400/5 to-transparent border border-yellow-400/20 rounded-lg hover:border-yellow-400/50 hover:bg-yellow-400/10 transition-all"
+                  onClick={() => handleNavigation(item.path)}
+                  className={`w-full group flex items-center space-x-3 p-4 rounded-lg transition-all ${
+                    isActive(item.path)
+                      ? 'bg-yellow-400/20 border-yellow-400/50'
+                      : 'bg-gradient-to-r from-yellow-400/5 to-transparent border-yellow-400/20 hover:border-yellow-400/50 hover:bg-yellow-400/10'
+                  } border`}
                 >
-                  <div className="w-10 h-10 bg-yellow-400/20 rounded-lg flex items-center justify-center group-hover:bg-yellow-400 transition-colors">
-                    <item.icon className="w-5 h-5 text-yellow-400 group-hover:text-black transition-colors" />
+                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-colors ${
+                    isActive(item.path)
+                      ? 'bg-yellow-400'
+                      : 'bg-yellow-400/20 group-hover:bg-yellow-400'
+                  }`}>
+                    <item.icon className={`w-5 h-5 transition-colors ${
+                      isActive(item.path)
+                        ? 'text-black'
+                        : 'text-yellow-400 group-hover:text-black'
+                    }`} />
                   </div>
-                  <span className="text-yellow-100 group-hover:text-yellow-400 font-semibold transition-colors">
+                  <span className={`font-semibold transition-colors ${
+                    isActive(item.path)
+                      ? 'text-yellow-400'
+                      : 'text-yellow-100 group-hover:text-yellow-400'
+                  }`}>
                     {item.name}
                   </span>
-                </a>
+                </button>
               ))}
             </div>
 
@@ -150,7 +198,10 @@ export default function Navbar() {
                 </div>
               </div>
               
-              <button className="w-full py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-lg shadow-lg shadow-yellow-500/30 hover:shadow-yellow-500/50 transition-all">
+              <button 
+                onClick={handleLogout}
+                className="w-full py-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-lg shadow-lg shadow-yellow-500/30 hover:shadow-yellow-500/50 transition-all"
+              >
                 LOGOUT
               </button>
             </div>
