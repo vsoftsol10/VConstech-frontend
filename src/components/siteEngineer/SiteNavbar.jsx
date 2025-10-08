@@ -42,7 +42,7 @@ export default function Navbar() {
             {[
               { name: 'Task Board', icon: Wrench, path: '/task-board' },
               { name: 'Attendance', icon: HardHat, path: '/attendance' },
-              { name: 'Files', icon: FileText, path: '/files' }
+              { name: 'Files', icon: FileText, path: '/vault' }
             ].map((item, idx) => (
               <a
                 key={idx}
