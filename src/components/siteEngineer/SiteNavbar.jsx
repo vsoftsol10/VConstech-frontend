@@ -6,6 +6,7 @@ import logo from "../../assets/constech-logo.png";
 export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -31,11 +32,26 @@ export default function Navbar() {
   const handleLogout = () => {
     // Add your logout logic here
     console.log('Logging out...');
-    navigate('/login');
+    navigate('/');
   };
 
   const isActive = (path) => {
     return location.pathname === path;
+  };
+
+  
+  const handleLogoutClick = () => {
+    setShowLogoutPopup(true);
+  };
+
+  // 🔹 Confirm logout
+  const confirmLogout = () => {
+    setShowLogoutPopup(false);
+    navigate("/"); // redirect to login or home page
+  };
+
+  const cancelLogout = () => {
+    setShowLogoutPopup(false);
   };
 
   return (
@@ -120,12 +136,12 @@ export default function Navbar() {
 
             {/* Logout Button */}
             <button 
-              onClick={handleLogout}
+              onClick={handleLogoutClick}
               className="group relative px-6 py-2.5 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-lg overflow-hidden shadow-lg shadow-yellow-500/30 hover:shadow-yellow-500/50 transition-all duration-300"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-400 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
               <span className="relative flex items-center space-x-2">
-                <span>LOGOUT</span>
+                <span>LOG OUT</span>
                 <div className="w-1.5 h-1.5 bg-black rounded-full group-hover:animate-ping"></div>
               </span>
             </button>
@@ -215,6 +231,30 @@ export default function Navbar() {
           clip-path: polygon(30% 0%, 70% 0%, 100% 50%, 70% 100%, 30% 100%, 0% 50%);
         }
       `}</style>
+
+      {showLogoutPopup && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-[60]">
+          <div className="bg-white rounded-lg shadow-lg p-6 w-80 text-center">
+            <h2 className="text-lg font-semibold text-gray-800 mb-3">
+              Are you sure you want to logout?
+            </h2>
+            <div className="flex justify-center gap-4 mt-4">
+              <button
+                onClick={confirmLogout}
+                className="bg-[#ffbe00] hover:bg-amber-400 text-gray-900 font-medium px-4 py-2 rounded-md"
+              >
+                Yes, Log Out
+              </button>
+              <button
+                onClick={cancelLogout}
+                className="bg-gray-200 hover:bg-gray-300 text-gray-700 font-medium px-4 py-2 rounded-md"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 }

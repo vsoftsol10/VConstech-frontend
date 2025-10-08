@@ -308,7 +308,7 @@ const ProjectManagement = () => {
                       </button>
                       <button
                         onClick={() => handleDelete(project.id)}
-                        className="hover:bg-red-500 text-black font-bold py-2 px-3 md:px-4 rounded-lg border-2 border-black shadow-lg flex items-center justify-center transition-colors"
+                        className="text-black font-bold py-2 px-3 md:px-4 rounded-lg border-2 border-black shadow-lg flex items-center justify-center transition-colors"
                       >
                         <Trash2 size={14} className="md:w-4 md:h-4" />
                       </button>

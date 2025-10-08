@@ -109,7 +109,7 @@ const SiteVault = () => {
             <div className="mb-6 px-2">
               <button
                 onClick={() => setShowAddForm(true)}
-                className="w-full bg-amber-400 hover:bg-amber-500 text-black font-bold py-3 md:py-4 px-6 rounded-lg shadow-lg flex items-center justify-center gap-2 transition-colors border-2 border-black"
+                className="w-full bg-amber-400 hover:bg-amber-500 text-black font-bold py-3 md:py-4 px-6 rounded-lg shadow-lg flex items-center justify-center gap-2 transition-colors"
               >
                 <Plus size={24} />
                 <span className="text-sm md:text-base">Add New Document</span>
