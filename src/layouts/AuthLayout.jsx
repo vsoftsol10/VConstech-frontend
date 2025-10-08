@@ -56,7 +56,7 @@ const Login = () => {
         console.log('Engineer login successful');
         // You can add engineer dashboard route here if needed
         // navigate('/engineerDashboard');
-        alert('Engineer dashboard not implemented yet');
+        navigate('/site-engineer-dashboard');
       } else {
         setError('Invalid employee ID or password for engineer');
       }
