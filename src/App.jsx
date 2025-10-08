@@ -10,6 +10,8 @@ import OurEngineers from './pages/contractor/OurEngineers';
 import OurProjects from './pages/contractor/OurProjects';
 import SEdashboard from './pages/siteEngineer/SEdashboard';
 import SiteVault from './pages/siteEngineer/SiteVault';
+import Attendance from './pages/siteEngineer/Attendance';
+import TaskBoard from './pages/siteEngineer/TaskBoard';
 
 function App() {
 
@@ -22,8 +24,11 @@ function App() {
       <Route path='/notifications' element={<Notification/>} />
       <Route path='/our-engg' element={<OurEngineers/>} />
       <Route path='/our-projects' element={<OurProjects/>} />
+      
       <Route path='/site-engineer-dashboard' element={<SEdashboard/>} />
       <Route path='/vault' element={<SiteVault/>} />
+      <Route path='/attendance' element={<Attendance/>} />
+      <Route path='/task-board' element={<TaskBoard/>} />
     </Routes>
   )
 }

@@ -79,7 +79,7 @@ export default function Navbar() {
                 <div className="relative flex items-center space-x-2">
                   <item.icon className={`w-4 h-4 transition-colors ${
                     isActive(item.path) 
-                      ? 'text-yellow-400' 
+                      ? 'text-yellow-400 group-hover:text-black' 
                       : 'text-yellow-400 group-hover:text-black'
                   }`} />
                   <span className={`font-semibold transition-colors whitespace-nowrap ${
@@ -120,7 +120,7 @@ export default function Navbar() {
 
             {/* Logout Button */}
             <button 
-              onClick={handleLogout}
+              onClick={()=>navigate("/")}
               className="group relative px-6 py-2.5 bg-gradient-to-r from-yellow-400 to-yellow-500 text-black font-bold rounded-lg overflow-hidden shadow-lg shadow-yellow-500/30 hover:shadow-yellow-500/50 transition-all duration-300"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-yellow-300 to-yellow-400 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
