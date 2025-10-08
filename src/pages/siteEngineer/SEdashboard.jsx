@@ -5,7 +5,7 @@ const SEdashboard = () => {
   return (
     <div>
         <SiteNavbar/>
-        <SiteVault/>
+        {/* <SiteVault/> */}
        <h1 className='my-35 text-center'> SEdashboard </h1> 
     </div>
   )

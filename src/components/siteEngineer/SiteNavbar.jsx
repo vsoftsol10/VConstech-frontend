@@ -51,7 +51,7 @@ export default function Navbar() {
         <div className="flex items-center justify-between py-4">
           {/* Logo with Construction Badge */}
           <button
-            onClick={() => handleNavigation('/')}
+            onClick={() => handleNavigation('/site-engineer-dashboard')}
             className="hover:opacity-80 transition-opacity flex-shrink-0"
             aria-label="Constech Home"
           >

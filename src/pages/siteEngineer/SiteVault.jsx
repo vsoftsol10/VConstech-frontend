@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Plus, Folder, File, Trash2, Upload, X, Save, Vault } from 'lucide-react';
+import SiteNavbar from '../../components/siteEngineer/SiteNavbar';
 
 const SiteVault = () => {
   const [documents, setDocuments] = useState([]);
@@ -82,12 +83,12 @@ const SiteVault = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-     
-
+ <div className="min-h-screen bg-gray-50">
+          <SiteNavbar/>
+  
       {/* Main Content */}
-      <div className="ml-14 md:ml-64 mt-14 md:mt-18 p-3 sm:p-4 md:p-6 lg:p-8">
-        <div className="max-w-6xl mx-auto">
+      <div className="mt-25 w-full p-3 sm:p-4 md:p-6 lg:p-8">
+        <div className="max-w-4xl mx-auto">
           <div className="mb-6 md:mb-8 text-center px-2 mt-6 sm:mt-10">
             <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-black mb-2">
               E-Vault
