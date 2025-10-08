@@ -40,13 +40,13 @@ export default function Navbar() {
           {/* Desktop Navigation Links */}
           <div className="hidden lg:flex items-center space-x-2">
             {[
-              { name: 'Task Board', icon: Wrench },
-              { name: 'Attendance', icon: HardHat },
-              { name: 'Files', icon: FileText }
+              { name: 'Task Board', icon: Wrench, path: '/task-board' },
+              { name: 'Attendance', icon: HardHat, path: '/attendance' },
+              { name: 'Files', icon: FileText, path: '/files' }
             ].map((item, idx) => (
               <a
                 key={idx}
-                href="#"
+                href={item.path}
                 className="group relative px-6 py-3 overflow-hidden"
               >
                 {/* Background Effect */}
@@ -109,7 +109,7 @@ export default function Navbar() {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-black border-t border-yellow-400/30">
+        <div className="md:hidden bg-white border-t border-yellow-400/30">
           <div className="px-4 py-6 space-y-6">
             {/* Mobile Navigation Links */}
             <div className="space-y-3">
@@ -138,7 +138,7 @@ export default function Navbar() {
               <div className="flex items-center space-x-3 p-4 bg-gradient-to-r from-yellow-400/10 to-transparent border border-yellow-400/30 rounded-lg">
                 <div className="relative">
                   <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-yellow-400 to-yellow-600 flex items-center justify-center shadow-lg">
-                    <svg className="w-7 h-7 text-black" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
                     </svg>
                   </div>
